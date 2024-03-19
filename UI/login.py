@@ -62,7 +62,7 @@ class LoginWindow(QMainWindow):
         provided_password = self.password_input.text()
 
         # Connect to the SQLite database
-        conn = sqlite3.connect('database/users.db')  # Ensure the path matches your project structure
+        conn = sqlite3.connect('persistence/users.db')  # Ensure the path matches your project structure
         cursor = conn.cursor()
 
         # Retrieve the user's hashed password from the database

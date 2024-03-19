@@ -1,9 +1,11 @@
 import json
+import os
 from PyQt6.QtWidgets import (
     QMainWindow, QLabel, QVBoxLayout, QWidget, QPushButton, 
     QScrollArea, QInputDialog, QMessageBox
 )
 from PyQt6.QtCore import Qt
+from .subject import SubjectWindow
 
 class TanorakWindow(QMainWindow):
     def __init__(self, show_main_menu_callback=None):
@@ -47,13 +49,19 @@ class TanorakWindow(QMainWindow):
         # Load and display subjects from file
         self.subjects = self.load_subjects()
         self.populate_subjects()
+        
 
     def add_subject(self):
         name, ok = QInputDialog.getText(self, "New Subject", "Subject name:")
         if ok and name:
+            # Append the new subject name to the subjects list
             self.subjects.append(name)
+            # Save the updated subjects list to the JSON file
             self.save_subjects()
+            # Repopulate the subjects in the UI
             self.populate_subjects()
+            # Create a new folder for the subject inside the database folder
+            self.create_subject_folder(name)
 
     def populate_subjects(self):
         # Clear the current subjects list
@@ -72,18 +80,44 @@ class TanorakWindow(QMainWindow):
             self.scroll_area_layout.setAlignment(Qt.AlignmentFlag.AlignBottom)  # Align items to bottom
 
     def on_subject_clicked(self, subject):
-        QMessageBox.information(self, "Subject Selected", f"You selected: {subject}")
+        # Instead of displaying a message, create and display the SubjectWindow
+        # First, ensure to hide the current window
+        self.hide()
+        # Now create the SubjectWindow passing the subject name and the callback function
+        self.subject_window = SubjectWindow(subject, self.show_tanorak_menu)
+        self.subject_window.show()
+        
+        
+    def show_tanorak_menu(self):
+        # This function will be called by the SubjectWindow to show TanorakWindow again
+        # Make sure to check if the SubjectWindow is open, and if so, close it
+        if hasattr(self, 'subject_window') and self.subject_window.isVisible():
+            self.subject_window.close()
+        # Show the TanorakWindow again
+        self.show()
 
     def load_subjects(self):
         try:
-            with open('database/subjects.json', 'r') as file:
+            with open('persistence/subjects.json', 'r') as file:
                 return json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             return []
 
     def save_subjects(self):
-        with open('database/subjects.json', 'w') as file:
+        with open('persistence/subjects.json', 'w') as file:
             json.dump(self.subjects, file)
+            
+            
+    def create_subject_folder(self, subject_name):
+        # Define the path for the new folder
+        folder_path = os.path.join('persistence/subjects', subject_name)
+        # Check if the folder already exists to avoid overwriting it
+        if not os.path.exists(folder_path):
+            # Create the folder
+            os.makedirs(folder_path)
+            QMessageBox.information(self, "Folder Created", f"Folder for '{subject_name}' created successfully.")
+        else:
+            QMessageBox.warning(self, "Folder Exists", f"A folder for '{subject_name}' already exists.")
 
     def on_back_clicked(self):
         if self.show_main_menu_callback:

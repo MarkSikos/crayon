@@ -10,6 +10,7 @@ class AppController:
         self.main_menu = MainMenu(show_tanorak_callback=self.show_tanorak)
         self.tanorak_window = TanorakWindow(show_main_menu_callback=self.show_main_menu)
 
+
     def show_main_menu(self):
         self.tanorak_window.hide()
         self.main_menu.show()
