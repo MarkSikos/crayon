@@ -4,18 +4,15 @@ from PyQt6.QtWidgets import (
     QScrollArea, QInputDialog, QMessageBox
 )
 from PyQt6.QtCore import Qt
-from PyQt6.QtCore import pyqtSignal
 
 class TanorakWindow(QMainWindow):
-    
-    go_back_signal = pyqtSignal()
-    
-    def __init__(self):
+    def __init__(self, show_main_menu_callback=None):
         super().__init__()
+        self.show_main_menu_callback = show_main_menu_callback
         self.setWindowTitle("Tanórák")
         self.setGeometry(100, 100, 400, 500)  # Adjust size as needed
 
-        # Main layout
+        # Main layout for the window
         layout = QVBoxLayout()
 
         # Title label
@@ -25,10 +22,11 @@ class TanorakWindow(QMainWindow):
 
         # Scrollable area setup
         self.scroll_area = QScrollArea()
-        self.scroll_area_widget_contents = QWidget()
-        self.scroll_area_layout = QVBoxLayout(self.scroll_area_widget_contents)
+        scroll_area_widget_contents = QWidget()
+        self.scroll_area_layout = QVBoxLayout()
+        scroll_area_widget_contents.setLayout(self.scroll_area_layout)
         self.scroll_area.setWidgetResizable(True)
-        self.scroll_area.setWidget(self.scroll_area_widget_contents)
+        self.scroll_area.setWidget(scroll_area_widget_contents)
         layout.addWidget(self.scroll_area)
 
         # Add subject button
@@ -38,7 +36,7 @@ class TanorakWindow(QMainWindow):
 
         # Back button
         back_button = QPushButton("Back")
-        back_button.clicked.connect(self.go_back_signal.emit)
+        back_button.clicked.connect(self.on_back_clicked)
         layout.addWidget(back_button)
 
         # Set the central widget and layout
@@ -46,7 +44,7 @@ class TanorakWindow(QMainWindow):
         central_widget.setLayout(layout)
         self.setCentralWidget(central_widget)
 
-        # Load subjects from file
+        # Load and display subjects from file
         self.subjects = self.load_subjects()
         self.populate_subjects()
 
@@ -58,17 +56,23 @@ class TanorakWindow(QMainWindow):
             self.populate_subjects()
 
     def populate_subjects(self):
-        # Clear the current subjects list layout
+        # Clear the current subjects list
         while self.scroll_area_layout.count():
             item = self.scroll_area_layout.takeAt(0)
-            widget = item.widget()
-            if widget is not None:
-                widget.deleteLater()
+            if item.widget():
+                item.widget().deleteLater()
 
-        # Add subjects to the scrollable area
+        # Add subjects to the scrollable area as buttons
         for subject in self.subjects:
-            subject_label = QLabel(subject)
-            self.scroll_area_layout.addWidget(subject_label)
+            subject_button = QPushButton(subject)
+            subject_button.setFixedHeight(40)  # Set a fixed height for each button
+            # Connect each button to a method (e.g., opening a detail view for the subject)
+            subject_button.clicked.connect(lambda checked, s=subject: self.on_subject_clicked(s))
+            self.scroll_area_layout.addWidget(subject_button)
+            self.scroll_area_layout.setAlignment(Qt.AlignmentFlag.AlignBottom)  # Align items to bottom
+
+    def on_subject_clicked(self, subject):
+        QMessageBox.information(self, "Subject Selected", f"You selected: {subject}")
 
     def load_subjects(self):
         try:
@@ -80,8 +84,7 @@ class TanorakWindow(QMainWindow):
     def save_subjects(self):
         with open('database/subjects.json', 'w') as file:
             json.dump(self.subjects, file)
-            
-            
-            
-    
 
+    def on_back_clicked(self):
+        if self.show_main_menu_callback:
+            self.show_main_menu_callback()

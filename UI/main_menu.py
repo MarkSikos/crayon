@@ -7,8 +7,12 @@ from .tanorak import TanorakWindow
 class MainMenu(QMainWindow):
     
     
-    def __init__(self):
+    def __init__(self, show_tanorak_callback=None):
         super().__init__()
+        
+        self.show_tanorak_callback = show_tanorak_callback
+        self.setup_ui()
+        
         self.setWindowTitle("Crayon")
         self.setGeometry(100, 100, 400, 500)  # Adjust the size and position as needed
         
@@ -59,11 +63,16 @@ class MainMenu(QMainWindow):
         # Set the central widget and layout
         self.setCentralWidget(central_widget)
         
+        self.tanorak_button.clicked.connect(self.show_tanorak)
+        
         
     def show_tanorak(self):
-        self.tanorak_window = TanorakWindow()
-        self.tanorak_window.show()
-        self.close()  # Close the main menu
+        #self.tanorak_window = TanorakWindow()
+        #self.tanorak_window.show()
+        #self.close()  # Close the main menu
+        
+        if self.show_tanorak_callback:
+            self.show_tanorak_callback()
         
     def show_dolgozatok(self):
         # Code to show the Dolgozatok section

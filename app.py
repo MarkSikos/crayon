@@ -7,19 +7,16 @@ class AppController:
     def __init__(self):
         self.app = QApplication([])
         self.login_window = LoginWindow(success_callback=self.show_main_menu)
-        #self.main_menu = None  # Placeholder for the main menu
-        self.main_menu = MainMenu()
-        self.tanorak_window = TanorakWindow()
-        # Connect the TanorakWindow's go_back_signal to the show_main_menu method
-        self.tanorak_window.go_back_signal.connect(self.show_main_menu)
-
+        self.main_menu = MainMenu(show_tanorak_callback=self.show_tanorak)
+        self.tanorak_window = TanorakWindow(show_main_menu_callback=self.show_main_menu)
 
     def show_main_menu(self):
-        #self.main_menu = MainMenu()
-        #self.main_menu.show()
-        if self.tanorak_window.isVisible():
-            self.tanorak_window.hide()
+        self.tanorak_window.hide()
         self.main_menu.show()
+
+    def show_tanorak(self):
+        self.main_menu.hide()
+        self.tanorak_window.show()
 
     def run(self):
         self.login_window.show()
