@@ -2,6 +2,9 @@ from PyQt6.QtWidgets import QApplication
 from UI.login import LoginWindow
 from UI.main_menu import MainMenu
 from UI.tanorak import TanorakWindow
+from PyQt6.QtGui import QGuiApplication
+import sys
+
 
 class AppController:
     def __init__(self):
