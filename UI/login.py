@@ -1,13 +1,16 @@
 # File path: /path/to/your/login.py
 
 import sqlite3
-from PyQt6.QtWidgets import QMainWindow, QLineEdit, QPushButton, QVBoxLayout, QWidget, QLabel, QGraphicsOpacityEffect, QApplication, QGraphicsDropShadowEffect
-from PyQt6.QtGui import QFont, QPalette, QColor
+from PyQt6.QtWidgets import QMainWindow, QLineEdit, QPushButton, QVBoxLayout, QWidget, QLabel, QGraphicsOpacityEffect, QApplication, QGraphicsDropShadowEffect, QHBoxLayout
+from PyQt6.QtGui import QFont, QPalette, QColor, QFontDatabase, QIcon, QPixmap
+
 from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, Qt
 from utility_modules.password_handling import check_password  # Adjust this import path as necessary
 class LoginWindow(QMainWindow):
     def __init__(self, success_callback=None):
         super().__init__()
+        self.setWindowTitle("Crayon Oktatási Szoftver")
+
         self.success_callback = success_callback
 
         # Get the screen size
@@ -17,11 +20,11 @@ class LoginWindow(QMainWindow):
 
         # Set the window size to match the screen size
         self.setGeometry(0, 0, screenWidth*0.2, screenHeight*0.4)
+        self.setFixedSize(self.width(), self.height())
 
-        self.setWindowTitle("Belépés")
-
-        # Set the font to be used in the widgets
-        font = QFont("Lucida", 12)
+        
+        font_family = "Segoe UI"
+        font = QFont(font_family, 10)  # Adjust size as needed
 
         # Set the application's palette for the background color
         palette = QPalette()
@@ -33,39 +36,96 @@ class LoginWindow(QMainWindow):
         self.setCentralWidget(central_widget)
         layout = QVBoxLayout(central_widget)
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        
+        # Title label
+        title_label = QLabel("Belépés")
+        title_label.setFont(QFont("Segoe UI", 28, QFont.Weight.ExtraBold))
+        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        title_label.setStyleSheet("margin-bottom: 20px;")  # Add margin for space below the title
+        layout.addWidget(title_label, alignment=Qt.AlignmentFlag.AlignTop)  # Add title label to the top of the layout
+        
+
+
 
         # Username input
         self.username_input = QLineEdit()
         self.username_input.setPlaceholderText("Felhasználói név")
         self.username_input.setFont(font)
-        self.username_input.setFixedWidth(screenWidth * 0.2)
-        layout.addWidget(self.username_input)
+        self.username_input.setFixedWidth(screenWidth * 0.15)
+        
+        username_layout = QHBoxLayout()
+        username_icon_label = QLabel(self)
+        username_icon_label.setPixmap(QPixmap('assets/username_light.png').scaledToHeight(20)) # Assuming you want the icon size to match text height
+        username_layout.addWidget(username_icon_label)
+        username_layout.addWidget(self.username_input)
+            
+        layout.addLayout(username_layout)
+        
 
         # Password input
         self.password_input = QLineEdit()
         self.password_input.setPlaceholderText("Jelszó")
         self.password_input.setEchoMode(QLineEdit.EchoMode.Password)
         self.password_input.setFont(font)
-        self.password_input.setFixedWidth(screenWidth * 0.2)
-        layout.addWidget(self.password_input)
+        self.password_input.setFixedWidth(screenWidth * 0.15)
+        
+        password_layout = QHBoxLayout()
+        password_icon_label = QLabel(self)
+        password_icon_label.setPixmap(QPixmap('assets/password_light.png').scaledToHeight(20))  # Same assumption as above
+        password_layout.addWidget(password_icon_label)
+        password_layout.addWidget(self.password_input)
+        
+        layout.addLayout(password_layout)
+        #layout.addWidget(self.password_input)
 
         # Login button with a nicer style
         login_button = QPushButton("Belépés")
         login_button.setFont(font)
-        login_button.setStyleSheet("background-color: #78CFA8; color: #FFFFFF; padding: 10px; border: none;")
-        login_button.setFixedWidth(screenWidth * 0.2)
+        login_button.setStyleSheet("background-color: #78CFA8; \
+                                   color: #FFFFFF; padding: 10px; \
+                                   border-radius:10px; \
+                                       border: none;")
+        login_button.setFixedWidth(screenWidth * 0.18)
         login_button.clicked.connect(self.on_login_clicked)
-        layout.addWidget(login_button)
+        
+        button_layout = QHBoxLayout()
+        button_layout.addStretch(25)
+        button_layout.addWidget(login_button)
+        button_layout.addStretch()
+        layout.addLayout(button_layout)
+        
+        
+        
+        #layout.addWidget(login_button)
 
         # Adjust layout spacing
         layout.setSpacing(10)
+        
+        self.centerOnScreen()
 
         # Set drop shadow effect
         #shadow_effect = QGraphicsDropShadowEffect(blurRadius=10, xOffset=3, yOffset=3)
         #central_widget.setGraphicsEffect(shadow_effect)
 
         # Setup fade-in animation
-        self.setupFadeInAnimation()
+        #self.setupFadeInAnimation()
+    
+    def centerOnScreen(self):
+        # Get the size of the screen
+        screen = QApplication.primaryScreen().geometry()
+        screenWidth = screen.width()
+        screenHeight = screen.height()
+
+        # Size of the window
+        windowWidth = screenWidth * 0.2  # Adjust the size as needed
+        windowHeight = screenHeight * 0.4  # Adjust the size as needed
+
+        # Calculate the center position
+        centerX = (screenWidth - windowWidth) // 2
+        centerY = (screenHeight - windowHeight) // 2
+
+        # Move the window to the center
+        self.setGeometry(centerX, centerY, windowWidth, windowHeight)
 
     def on_login_clicked(self):
         username = self.username_input.text()
