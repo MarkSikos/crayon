@@ -44,10 +44,9 @@ pip install PyQt6 sqlite3 pytesseract keras-ocr numpy fuzzywuzzy opencv-python u
 ## Technical Overview
 
 ### Architecture
-The software follows a Model-View-Controller (MVC) architecture:
+The software follows a Model-View (MV) architecture:
 - **Model:** Handles the core logic and data management.
 - **View:** Manages the user interface.
-- **Controller:** Acts as an intermediary between the model and view, processing user input.
 
 ### Technologies Used
 - **PyQt6:** For developing the graphical user interface.
