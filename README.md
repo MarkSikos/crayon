@@ -1,4 +1,4 @@
-# Crayon: Educational Software with Artificial Intelligence
+# Crayon: Educational Software with an OCR Module
 
 Welcome to **Crayon**, an innovative educational software designed to address teaching challenges in primary schools, particularly in lower grades. This project aims to provide solutions for teachers who face the burden of manually correcting and checking students' work. The software integrates handwriting processing modules to facilitate the learning process and provide immediate feedback to students.
 
