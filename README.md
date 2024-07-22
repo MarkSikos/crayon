@@ -74,4 +74,4 @@ We welcome contributions to improve Crayon! Feel free to open issues or submit p
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Acknowledgements
-Special thanks to the Eötvös Loránd University, Department of Artificial Intelligence, and all contributors to this project.
+Special thanks to the Eötvös Loránd University, Department of Artificial Intelligence, and Viktor Varga as my mentor teacher.
