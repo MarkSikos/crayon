@@ -1,0 +1,72 @@
+#addButton {
+    background-color: #4CAF50; 
+    color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+#addButton:hover {
+    background-color: #45a049; 
+    color: #FFFFFF
+}
+
+#deleteButton{
+    background-color: #f44336; 
+    color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 14px;    
+}
+
+#deleteButton:hover {
+    background-color: #d32f2f; 
+    color: #FFFFFF
+}
+
+#editButton{
+    background-color: #FFD800; 
+    color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 14px;    
+}
+
+#editButton:hover {
+    background-color: #E2C000; 
+    color: #FFFFFF
+}
+
+#commonButton {
+    background-color: #007BFF; 
+    color: #FFFFFF; 
+    border-radius: 15px;
+}
+
+#commonButton:hover {
+    background-color: #0056b3; 
+    color: #FFFFFF
+}
+
+#customButton {
+    background-color: #4CAF50; 
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    text-align: left;
+}
+
+#customButton:hover {
+    background-color: #45a049; 
+}
+
+#backButton{
+    background-color: #ECECE7; 
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#backButton:hover{
+    background-color:#cdd1c4
+}

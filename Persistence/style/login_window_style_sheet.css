@@ -1,0 +1,25 @@
+QMainWindow {
+    background-color: #ECECE7;
+}
+
+QLineEdit {
+    color: #000000;
+    border: 1px solid #FFFFFF;
+}
+
+QLabel#label {
+    color: #FFFFFF;
+}
+
+QToolButton {
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+}
+
+QToolButton:hover {
+    background-color: #45a049;
+}
+
+

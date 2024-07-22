@@ -1,0 +1,45 @@
+#addSubjectButton {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+#addSubjectButton:hover {
+    background-color: #45a049;
+}
+
+#removeSubjectButton {
+    background-color: #f44336;
+    color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+#removeSubjectButton:hover {
+    background-color: #d32f2f;
+}
+
+#subjectButton {
+    background-color: #ECECE7;
+    color: black;
+    border-radius: 9px;
+    padding: 0px 0px;
+    margin: 1px 0px;
+}
+
+#subjectButton:hover {
+    background-color: #cdd1c4;
+}
+
+#backButton{
+    background-color: #ECECE7; 
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#backButton:hover{
+    background-color:#cdd1c4
+}

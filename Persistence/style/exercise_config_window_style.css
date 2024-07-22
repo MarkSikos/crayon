@@ -1,0 +1,55 @@
+QToolButton {
+    background-color: #4CAF50; 
+    color: white;
+    border-radius: 10px; 
+    padding: 5px 10px; 
+    font-size: 14px;
+}
+QToolButton:hover {
+    background-color: #45a049;
+}
+
+QDateEdit {
+    background-color: #0096FF; 
+    color: white;
+    border-radius: 10px; 
+    padding: 5px 10px; 
+    font-size: 14px;
+}
+QDateEdit:hover {
+    background-color: #007ACC;
+}
+
+QLineEdit {
+    border-radius: 10px;
+    padding: 6px;
+    font-size: 16px;
+}
+
+QToolButton#addQuestionButton {
+    background-color: #FFD800;
+    color: white;
+}
+
+QToolButton#addQuestionButton:hover {
+    background-color: #E2C000;
+}
+
+QToolButton#deleteButton {
+    background-color: #f44336;
+    color: white;
+}
+QToolButton#deleteButton:hover {
+    background-color: #d32f2f;
+}
+
+#backButton{
+    background-color: #ECECE7; 
+    border-radius: 10px;
+    padding: 10px;
+
+}
+
+#backButton:hover{
+    background-color:#cdd1c4
+}

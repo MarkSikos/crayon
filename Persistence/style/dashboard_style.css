@@ -1,0 +1,38 @@
+QTableWidget {
+    background-color: white;
+    border: 1px solid #D1D4D8;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+QTableWidget::item {
+    padding: 6px;
+    border-color: transparent;
+    color: black;  
+}
+
+QTableWidget::item:selected {
+    background-color: #a8d0e6;  
+    color: black; 
+}
+
+QHeaderView::section {
+    background-color: #E1E4E8;
+    padding: 4px;
+    border: 1px solid #D1D4D8;
+    font-size: 10pt;
+    font-weight: bold;
+}
+QTableWidget QTableCornerButton::section {
+    background: #E1E4E8;
+}
+
+#backButton{
+    background-color: #ECECE7; 
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#backButton:hover{
+    background-color:#cdd1c4
+}

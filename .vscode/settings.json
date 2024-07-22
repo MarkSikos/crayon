@@ -1,0 +1,12 @@
+{
+    "python.Testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./Testing",
+        "-p",
+        "*test*.py"
+    ],
+    "python.Testing.pytestEnabled": false,
+    "python.Testing.unittestEnabled": true,
+    "git.ignoreLimitWarning": true
+}

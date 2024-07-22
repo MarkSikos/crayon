@@ -1,0 +1,27 @@
+QToolButton#titleLabel {
+    background-color: #FFA500; 
+    color: #FFFFFF; /* font_color */
+    border-radius: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+QToolButton {
+    background-color: #ECECE7;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+QToolButton:hover{
+    background-color: #cdd1c4;
+}
+
+QComboBox {
+    background-color: #ECECE7;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+QComboBox:hover{
+    background-color: #cdd1c4;
+}
